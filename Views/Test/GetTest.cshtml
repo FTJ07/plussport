@@ -1,0 +1,23 @@
+﻿@model evaluation.ViewModels.TestViewModel
+
+<form method="POST" asp-action="InsertTest" asp-controller="Test">
+	<h1>Create New Test</h1>
+	  <div class="form-group">
+    <select class="form-control" asp-for="TestType" 
+            asp-items="@(new SelectList(Model.TestTypeList,"TestTypeId","TestTypeName"))">
+        <option class="form-control">Please select one</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="pwd">Date:</label>
+    <input type="date" class="form-control" asp-for="TestType" >
+  </div>
+
+    <div class="form-group">
+    <label for="pwd">Test Name:</label>
+    <input type="text" class="form-control" asp-for="TestName" >
+  </div>
+
+
+  <button type="submit" class="btn btn-info">Submit</button>
+</form>

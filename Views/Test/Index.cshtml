@@ -1,0 +1,54 @@
+﻿@model List<evaluation.Models.TestListModel>
+
+<div class="container">
+
+<div class="row">
+		<a asp-action="GetTest" asp-controller="Test"> Create New Test </a>
+</div>
+
+</div>
+
+
+
+<div class="container">
+
+	<div class="row">
+				<table class="table">
+							<thead>
+								<tr>
+								<th>Date</th>
+								<th>Number Of Participants</th>
+								<th>Test Name</th>
+								<th>Test Type</th>
+								<th>Test Details</th>
+								</tr>
+							</thead>
+
+							<tbody id="tableBody">
+
+							@for (int i = 0; i < Model.Count; i++)
+							{            
+								<tr>
+									<td>          
+										<label>@(Model[i].CreateDate)</label>										
+									</td>
+									<td>          
+										<label>@(Model[i].Participate)</label>										
+									</td>
+									<td>          
+										<label>@(Model[i].TestName)</label>										
+									</td>
+									<td>          
+										<label>@(Model[i].TestTypeName)</label>										
+									</td>
+									<td>
+									   <a asp-action="GetTestDetails"  asp-route-id="@Model[i].TestId" asp-controller="Test"> Details </a>
+									</td>
+								</tr>            
+							}
+
+							</tbody>
+				</table>
+	</div>
+
+</div>
