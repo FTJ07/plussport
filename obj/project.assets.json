@@ -12269,11 +12269,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\Freelancing\\5-1-19\\evaluation\\evaluation.csproj",
+      "projectUniqueName": "F:\\Freelancing\\plus-sport\\Project\\evaluation\\evaluation.csproj",
       "projectName": "evaluation",
-      "projectPath": "F:\\Freelancing\\5-1-19\\evaluation\\evaluation.csproj",
+      "projectPath": "F:\\Freelancing\\plus-sport\\Project\\evaluation\\evaluation.csproj",
       "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
-      "outputPath": "F:\\Freelancing\\5-1-19\\evaluation\\obj\\",
+      "outputPath": "F:\\Freelancing\\plus-sport\\Project\\evaluation\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

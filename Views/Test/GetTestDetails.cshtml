@@ -1,3 +1,84 @@
-﻿  
- 
-  <a asp-action="DeleteTest"  asp-route-id="@ViewBag.ID" asp-controller="Test"> Delete Test </a>
+﻿@model List<evaluation.Models.TestDetailsModel>
+
+    <div class="container">
+
+
+
+    </div>
+
+
+
+    <div class="container">
+
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Ranking</th>
+                        <th>Distance (Meter)</th>
+                        <th>Fitness Rating</th>
+
+                    </tr>
+                </thead>
+
+                <tbody id="tableBody">
+
+                    @for (int i = 0; i < Model.Count; i++) { 
+					var output = "";
+					@if(Model[i].Result > 3500){
+							output = "Very good";
+					}else if(Model[i].Result >2000 && Model[i].Result <=3500){
+							output = "Good";
+					}else if(Model[i].Result >1000 && Model[i].Result <=2000){
+							output = "Average";
+					}else{
+						output = "Below Average";
+					}
+					
+					<tr>
+                        <td>
+                            <label>@(i+1)  @(Model[i].UserName)</label>
+                        </td>
+                        <td>
+                            <label>@(Model[i].Result)</label>
+                        </td>
+                        <td>
+                            <label>@output</label>
+                        </td>
+
+					    <td>
+                            <a  href="javascript:void(0)" onclick="populateEditModal(@(Model[i].UserId),'@(Model[i].UserName)',@(Model[i].Result))">Edit</a>
+                        </td>
+
+                        </tr>
+                        }
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <div class="row" style="margin: 20px 0;justify-content: center;align-items: center;display: flex;">
+        <a asp-action="DeleteTest" class="btn btn-info btn-lg" asp-route-id="@ViewBag.ID" asp-controller="Test"> Delete
+            Test </a>
+    </div>
+
+	<input type="hidden" id="testId" value="@ViewBag.ID"/>
+
+    <!-- Trigger the modal with a button -->
+	<div class="row" style="margin: 20px 0;justify-content: center;align-items: center;display: flex;">
+		<button type="button"  class="btn btn-info btn-lg" onclick="populateNewAuthleteModal()">Add New Athelet to
+			Test</button>
+    </div>
+
+    <!-- Modal -->
+    <div id="modalBody" style="">
+    
+
+    </div>
+
+    <link href="/css/athlete.css" rel="stylesheet" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+	<script src="/js/athleteJavascript.js"></script>
+

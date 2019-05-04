@@ -14,8 +14,5 @@ namespace evaluation.Services
         Task<List<TestDetailsModel>> GetTestDetails(int testId);
         Task<int> InactiveTest(int testId);
 
-
-        Task<int> InsertAthleteInTest(TestDetailsModel testDetailsModel);
-        Task<int> InactiveAthlete(int testId, int userId);
     }
 }

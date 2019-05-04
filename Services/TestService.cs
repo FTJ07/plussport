@@ -44,15 +44,7 @@ namespace evaluation.Services
             return await _testDb.GetTestDetailsAsync(testId);
         }
 
-        public async Task<int> InactiveAthlete(int testId, int userId)
-        {
-            return await _testDb.InactiveAthleteAsync(testId, userId);
-        }
 
-        public async Task<int> InsertAthleteInTest(TestDetailsModel testDetailsModel)
-        {
-            return await _testDb.InsertAthleteInTestAsync(testDetailsModel);
-        }
 
     }
 }

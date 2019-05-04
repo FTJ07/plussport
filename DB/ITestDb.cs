@@ -14,7 +14,7 @@ namespace evaluation.DB
         Task<List<TestDetailsModel>> GetTestDetailsAsync(int testId);
         Task<int> InactiveTestAsync(int testId);
 
-        Task<int> InsertAthleteInTestAsync(TestDetailsModel testDetailsModel);
-        Task<int> InactiveAthleteAsync(int testId, int userId);
+
+
     }
 }

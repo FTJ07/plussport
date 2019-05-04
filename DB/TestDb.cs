@@ -85,7 +85,7 @@ namespace evaluation.DB
                                     Left Join plussport.testype tt
                                     on t.TestType = tt.TestTypeId
                                     Where t.IsActive=true
-                                    Group by t.TestId;";
+                                    Group by t.TestId Order By t.TestId desc;";
 
                 cmd.Connection = _dbConfig.Connection;
                 _dbConfig.Connection.Open();
@@ -96,6 +96,7 @@ namespace evaluation.DB
                     list.Add(new TestListModel()
                     {
                         TestId = Convert.ToInt32(reader["TestId"]),
+                        CreateDate = Convert.ToDateTime(reader["CreatedDate"]),
                         TestName = reader["TestName"].ToString(),
                         TestTypeName = reader["TestTypeName"].ToString(),
                         Participate = Convert.ToInt32(reader["Participate"])
@@ -122,7 +123,7 @@ namespace evaluation.DB
                 cmd.CommandText = @"SELECT * FROM plussport.testdetails as td
                             Left join plussport.user as u
                             On td.UserId = u.UserId
-                            Where td.TestId = "+ testId +";";
+                            Where td.TestId = "+ testId + " and td.IsActive = true;";
 
                 cmd.Connection = _dbConfig.Connection;
                 _dbConfig.Connection.Open();
@@ -134,7 +135,7 @@ namespace evaluation.DB
                     {
                         TestId = Convert.ToInt32(reader["TestId"]),
                         TestDetailsId = Convert.ToInt32(reader["TestDetailsId"]),
-                        UserId = Convert.ToInt32(reader["TestDetailsId"]),
+                        UserId = Convert.ToInt32(reader["UserId"]),
                         UserName = reader["UserName"].ToString(),
                         Result = Convert.ToInt32(reader["Result"])
                     });
@@ -174,52 +175,7 @@ namespace evaluation.DB
         }
 
 
-        public async Task<int> InsertAthleteInTestAsync(TestDetailsModel testDetailsModel)
-        {
-            var Id = 0;
-            try
-            {
-                var cmd = new MySqlCommand();
-                cmd.CommandText = @"INSERT INTO `testdetails` (`UserId`, `TestId`,`Result`,`IsActive`) VALUES (@UserId, @TestId, @Result, @IsActive);";
-                cmd.Parameters.Add(new MySqlParameter { ParameterName = "@UserId", DbType = DbType.Int16, Value =testDetailsModel.UserId });
-                cmd.Parameters.Add(new MySqlParameter { ParameterName = "@TestId", DbType = DbType.Int16, Value = testDetailsModel.TestId });
-                cmd.Parameters.Add(new MySqlParameter { ParameterName = "@Result", DbType = DbType.Int16, Value = testDetailsModel.Result });
-                cmd.Parameters.Add(new MySqlParameter { ParameterName = "@IsActive", DbType = DbType.Boolean, Value = testDetailsModel.IsActive });
-                cmd.Connection = _dbConfig.Connection;
-                _dbConfig.Connection.Open();
-                await cmd.ExecuteNonQueryAsync();
-                Id = (int)cmd.LastInsertedId;
-                _dbConfig.Connection.Close();
-            }
-            catch (Exception ex)
-            {
-
-            }
-
-            return Id;
-
-        }
-
-        public async Task<int> InactiveAthleteAsync(int testId, int userId)
-        {
-            var result = 0;
-            try
-            {
-                var cmd = new MySqlCommand();
-                cmd.CommandText = @"Update testdetails SET IsActive = false where TestId =" + testId + " and UserId "+ userId + ";";
-                cmd.Connection = _dbConfig.Connection;
-                _dbConfig.Connection.Open();
-                result = await cmd.ExecuteNonQueryAsync();
-
-            }
-            catch (Exception ex)
-            {
-
-            }
-
-            return result;
-
-        }
+      
 
 
     }

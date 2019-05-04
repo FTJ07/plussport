@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using evaluation.Models;
 using evaluation.Services;
 using evaluation.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace evaluation.Controllers
 {
+  
     public class TestController : Controller
     {
         private readonly ITestService _testService;
@@ -41,7 +43,8 @@ namespace evaluation.Controllers
         {
 
             @ViewBag.ID = id;
-            return View();
+            var testDetials = _testService.GetTestDetails(id).Result;
+            return View(testDetials);
         }
 
         [HttpGet]
@@ -76,6 +79,8 @@ namespace evaluation.Controllers
             }
           
         }
+
+
 
         public IActionResult Privacy()
         {
